@@ -14,4 +14,4 @@ salt/salt/etc/ssl/certs/chain.pem
 salt/salt/etc/ssl/private/key.pem
 
 # FreeSWITCH certs.
-#salt/salt/service/freeswitch/certs/*
+salt/salt/service/freeswitch/certs/*

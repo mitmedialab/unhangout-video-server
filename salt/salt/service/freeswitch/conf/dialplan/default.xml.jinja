@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    NOTICE:
+    
+    This context is usually accessed via authenticated callers on the sip profile on port 5060 
+    or transfered callers from the public context which arrived via the sip profile on port 5080.
+    
+    Authenticated users will use the user_context variable on the user to determine what context
+    they can access.  You can also add a user in the directory with the cidr= attribute acl.conf.xml
+    will build the domains ACL using this value.
+-->
+<!-- http://wiki.freeswitch.org/wiki/Dialplan_XML -->
+<include>
+  <context name="default">
+
+    <extension name="unloop">
+      <condition field="${unroll_loops}" expression="^true$"/>
+      <condition field="${sip_looped_call}" expression="^true$">
+	      <action application="deflect" data="${destination_number}"/>
+      </condition>
+    </extension>
+
+    <extension name="global" continue="true">
+      <condition field="${call_debug}" expression="^true$" break="never">
+	      <action application="info"/>
+      </condition>
+
+
+      <condition field="${rtp_has_crypto}" expression="^($${rtp_sdes_suites})$" break="never">
+        <action application="set" data="rtp_secure_media=true"/>
+      </condition>
+
+      <!--
+       Since we have inbound-late-negotation on by default now the
+       above behavior isn't the same so you have to do one extra step.
+      -->
+      <condition field="${endpoint_disposition}" expression="^(DELAYED NEGOTIATION)"/>
+      <condition field="${switch_r_sdp}" expression="(AES_CM_128_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_80)" break="never">
+        <action application="set" data="rtp_secure_media=true"/>
+        <!-- Offer SRTP on outbound legs if we have it on inbound. -->
+        <!-- <action application="export" data="rtp_secure_media=true"/> -->
+      </condition>
+
+
+      <condition>
+        <action application="export" data="RFC2822_DATE=${strftime(%a, %d %b %Y %T %z)}"/>
+      </condition>
+
+    </extension>
+
+    <!-- STEREO 48kHz conferences / Video MCU -->
+    <extension name="cdquality_conferences">
+      <condition field="username" expression="^unhangout_moderator@${domain}$" break="never">
+        <action application="set" data="conference_member_flags=moderator"/>
+      </condition>
+      <condition field="destination_number" expression="^(35\d{2})$">
+        <action application="info"/>
+        <action application="answer"/>
+        <action application="conference" data="$1-${domain_name}@video-mcu-stereo"/>
+      </condition>
+    </extension>
+
+  </context>
+</include>

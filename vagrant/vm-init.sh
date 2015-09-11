@@ -86,11 +86,11 @@ vagrant up --no-provision
 
 # This is necessary so that the vagrant-vbguest plugin can be properly
 # installed.
-#echo "Updating server kernel..."
-#vagrant ssh -- "sudo yum clean all"
-#vagrant ssh -- "sudo yum -y update kernel*"
-#echo "Ensuring gcc/make/kernel-devel are installed..."
-#vagrant ssh -- "sudo yum -y install gcc make kernel-devel"
+echo "Updating server kernel..."
+vagrant ssh -- "sudo apt-get -q -y update"
+vagrant ssh -- "sudo apt-get -q -y upgrade linux-image-amd64"
+echo "Ensuring gcc/make/kernel-devel are installed..."
+vagrant ssh -- "sudo apt-get -q -y install gcc make linux-kernel-headers"
 echo "Installing some useful preliminary packages"
 vagrant ssh -- "sudo apt-get -q -y install rsync vim"
 

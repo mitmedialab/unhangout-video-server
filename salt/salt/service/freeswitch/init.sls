@@ -28,12 +28,9 @@ freeswitch-repo-deps-setenv:
     # re-executing.
     - unless: test -d /usr/share/doc/freeswitch-video-deps-most
 
-freeswitch-video-deps-packages:
+freeswitch-video-deps-package:
   pkg.installed:
-    - pkgs:
-      # Needed for VLC support of MP4 codec.
-      - libavcodec-extra
-      - freeswitch-video-deps-most
+    - name: freeswitch-video-deps-most
     - require:
       - environ: freeswitch-repo-deps-setenv
 
@@ -45,7 +42,7 @@ freeswitch-repo-deps-rmenv:
         APT_LISTCHANGES_FRONTEND: False
     - update_minion: True
     - require:
-      - pkg: freeswitch-video-deps-packages
+      - pkg: freeswitch-video-deps-package
     # Not the cleanest test, but it prevents the state from unnecessarily
     # re-executing.
     - unless: test -d /usr/share/doc/freeswitch-video-deps-most
@@ -365,4 +362,4 @@ extend:
   freeswitch-repo:
     pkgrepo.managed:
       - require_in:
-        - pkg: freeswitch-video-deps-packages
+        - pkg: freeswitch-video-deps-package

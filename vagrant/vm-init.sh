@@ -59,6 +59,8 @@ sed -i.bak "s%###VAGRANT_VM_BOX###%${VAGRANT_VM_BOX}%g" Vagrantfile
 rm Vagrantfile.bak
 sed -i.bak "s%###SALT_DIR###%${SALT_DIR}%g" Vagrantfile
 rm Vagrantfile.bak
+sed -i.bak "s%###SALT_MINION_ID###%${SALT_MINION_ID}%g" Vagrantfile
+rm Vagrantfile.bak
 if [ -n "${GIT_CODE_DIR}" ]; then
   sed -i.bak "s%###GIT_CODE_DIR###%${GIT_CODE_DIR}%g" Vagrantfile
   rm Vagrantfile.bak

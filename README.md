@@ -5,6 +5,7 @@ Vagrant/Salt configuration for automatically deploying an [Unhangout](http://unh
 
 ### Vagrant development servers.
  1. Install [Git](http://git-scm.com), [Vagrant](https://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org). OS X [Homebrew](http://brew.sh) users, consider easy installation via [Homebrew Cask](http://caskroom.io).
+ 1. Run the following command to checkout this project: ```git clone https://github.com/thehunmonkgroup/unhangout-video-server.git```
  1. From the command line, change to the <code>vagrant</code> directory, and you'll find <code>settings.sh.example</code>. Copy that file in the same directory to <code>settings.sh</code>.
  1. Edit to taste, the default values will most likely work just fine.
  1. Follow instructions below for configuring pillar data and SSL certs.
@@ -12,7 +13,7 @@ Vagrant/Salt configuration for automatically deploying an [Unhangout](http://unh
  1. Once the script successfully completes the pre-flight checks, it will automatically handle the rest of the installation and setup. Relax, grab a cup of chai, and watch the setup process roll by on screen. :)
  1. Visit <code>https://[fqdn]/verto-communicator</code> in your browser, and you should see the main page for the Unhangout software.
  1. The setup script outputs optional configuration you can add to your .ssh/config file, to enable easy root SSH access to the server if you configured an SSH pubkey as above.
- 1. The installed virtual machine can be controlled like any other Vagrant VM. See [this Vagrant cheat sheet](http://notes.jerzygangi.com/vagrant-cheat-sheet) for more details. 
+ 1. The installed virtual machine can be controlled like any other Vagrant VM. See [this Vagrant cheat sheet](http://notes.jerzygangi.com/vagrant-cheat-sheet) for more details.
  1. If for any reason the installation fails, or you just want to completely remove the installed virtual machine, run the <code>vagrant/kill-development-environment.sh</code> script from the command line.
 
 ### Production servers.
@@ -27,7 +28,7 @@ Vagrant/Salt configuration for automatically deploying an [Unhangout](http://unh
  1. ```cp /var/local/git/unhangout-video-server/production/salt/grains.conf /etc/salt/minion.d/```
  1. Follow instructions below for configuring pillar data and SSL certs.
  1. ```salt-call state.highstate```
- 
+
 ### Configuring pillar data
 
  * In the <code>salt/pillar/server</code> directory, you'll find three example configuration files: one for development, one for production, and one for common settings across environments.

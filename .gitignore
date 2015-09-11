@@ -12,9 +12,7 @@ salt/pillar/server/development.sls
 salt/pillar/server/production.sls
 
 # HTTPS certs.
-salt/salt/etc/ssl/certs/cert.pem
-salt/salt/etc/ssl/certs/chain.pem
-salt/salt/etc/ssl/private/key.pem
+salt/salt/etc/ssl/cert.pem
+salt/salt/etc/ssl/chain.pem
+salt/salt/etc/ssl/key.pem
 
-# FreeSWITCH certs.
-salt/salt/service/freeswitch/certs/*

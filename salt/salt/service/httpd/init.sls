@@ -66,21 +66,21 @@ apache-enable-default-ssl-site:
 
 /etc/ssl/certs/cert.pem:
   file.managed:
-    - source: salt://etc/ssl/certs/cert.pem
+    - source: salt://etc/ssl/cert.pem
     - user: root
     - group: root
     - mode: 644
 
 /etc/ssl/certs/chain.pem:
   file.managed:
-    - source: salt://etc/ssl/certs/chain.pem
+    - source: salt://etc/ssl/chain.pem
     - user: root
     - group: root
     - mode: 644
 
 /etc/ssl/private/key.pem:
   file.managed:
-    - source: salt://etc/ssl/private/key.pem
+    - source: salt://etc/ssl/key.pem
     - user: root
     - group: root
     - mode: 640

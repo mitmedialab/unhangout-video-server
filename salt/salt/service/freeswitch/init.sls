@@ -74,17 +74,57 @@ freeswitch-build:
     - require:
       - cmd: freeswitch-build
 
-{% for cert in ['agent', 'cafile', 'wss'] %}
-/usr/local/freeswitch/certs/{{ cert }}.pem:
+/usr/local/freeswitch/certs/agent.pem:
   file.managed:
-    - source: salt://service/freeswitch/certs/{{ server_id }}/{{ cert }}.pem
     - user: root
     - group: freeswitch
     - mode: 640
     - require:
       - group: freeswitch-group
       - file: /usr/local/freeswitch/certs
-{% endfor %}
+
+build-agent.pem:
+  file.append:
+    - name: /usr/local/freeswitch/certs/agent.pem
+    - sources:
+      - salt://etc/ssl/cert.pem
+      - salt://etc/ssl/key.pem
+    - require:
+      - file: /usr/local/freeswitch/certs
+      - file: /etc/ssl/certs/cert.pem
+      - file: /etc/ssl/private/key.pem
+
+/usr/local/freeswitch/certs/wss.pem:
+  file.managed:
+    - user: root
+    - group: freeswitch
+    - mode: 640
+    - require:
+      - group: freeswitch-group
+      - file: /usr/local/freeswitch/certs
+
+build-wss.pem:
+  file.append:
+    - name: /usr/local/freeswitch/certs/wss.pem
+    - sources:
+      - salt://etc/ssl/cert.pem
+      - salt://etc/ssl/key.pem
+      - salt://etc/ssl/chain.pem
+    - require:
+      - file: /usr/local/freeswitch/certs
+      - file: /etc/ssl/certs/cert.pem
+      - file: /etc/ssl/private/key.pem
+      - file: /etc/ssl/certs/chain.pem
+
+/usr/local/freeswitch/certs/cafile.pem:
+  file.managed:
+    - source: salt://etc/ssl/chain.pem
+    - user: root
+    - group: freeswitch
+    - mode: 640
+    - require:
+      - group: freeswitch-group
+      - file: /usr/local/freeswitch/certs
 
 /usr/local/freeswitch/db:
   file.directory:
@@ -340,9 +380,9 @@ freeswitch-service:
       - file: /lib/systemd/system/freeswitch.service
       - file: /etc/init.d/freeswitch
     - watch:
-      {% for cert in ['agent', 'cafile', 'wss'] %}
-      - file: /usr/local/freeswitch/certs/{{ cert }}.pem
-      {% endfor %}
+      - file: build-agent.pem
+      - file: build-wss.pem
+      - file: /usr/local/freeswitch/certs/cafile.pem
       - file: /usr/local/freeswitch/conf/vars.xml
       - file: /usr/local/freeswitch/conf/autoload_configs/acl.conf.xml
       - file: /usr/local/freeswitch/conf/autoload_configs/conference.conf.xml

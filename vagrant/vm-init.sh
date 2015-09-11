@@ -95,6 +95,7 @@ echo "Installing some useful preliminary packages"
 vagrant ssh -- "sudo apt-get -q -y install rsync vim"
 
 vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-hostsupdater
 
 # Reloading here allows the vagrant-vbguest plugin to handle its job before
 # the rest of the install.

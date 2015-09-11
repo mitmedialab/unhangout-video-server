@@ -1,0 +1,49 @@
+# Overview
+Vagrant/Salt configuration for automatically deploying an [Unhangout](http://unhangout.media.mit.edu) video server.
+
+## Installation
+
+### Vagrant development servers.
+ 1. Install [Git](http://git-scm.com), [Vagrant](https://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org). OS X [Homebrew](http://brew.sh) users, consider easy installation via [Homebrew Cask](http://caskroom.io).
+ 1. From the command line, change to the <code>vagrant</code> directory, and you'll find <code>settings.sh.example</code>. Copy that file in the same directory to <code>settings.sh</code>.
+ 1. Edit to taste, the default values will most likely work just fine.
+ 1. Follow instructions below for configuring pillar data and SSL certs.
+ 1. From the command line, run <code>./development-environment-init.sh</code>.
+ 1. Once the script successfully completes the pre-flight checks, it will automatically handle the rest of the installation and setup. Relax, grab a cup of chai, and watch the setup process roll by on screen. :)
+ 1. Visit <code>https://[fqdn]/verto-communicator</code> in your browser, and you should see the main page for the Unhangout software.
+ 1. The setup script outputs optional configuration you can add to your .ssh/config file, to enable easy root SSH access to the server if you configured an SSH pubkey as above.
+ 1. The installed virtual machine can be controlled like any other Vagrant VM. See [this Vagrant cheat sheet](http://notes.jerzygangi.com/vagrant-cheat-sheet) for more details. 
+ 1. If for any reason the installation fails, or you just want to completely remove the installed virtual machine, run the <code>vagrant/kill-development-environment.sh</code> script from the command line.
+
+### Production servers.
+ 1. Start with a fresh Debian 8 install
+ 1. ```apt-get -y install git```
+ 1. ```mkdir -p /var/local/git```
+ 1. ```cd /var/local/git && git clone https://github.com/thehunmonkgroup/unhangout-video-server.git```
+ 1. ```ln -s /var/local/git/unhangout-video-server/salt /srv/salt```
+ 1. ```cd && wget -O install_salt.sh https://bootstrap.saltstack.com && sh install_salt.sh -P git v2014.7.6 && systemctl disable salt-minion.service && systemctl stop salt-minion.service```
+ 1. ```cp /var/local/git/unhangout-video-server/production/salt/minion /etc/salt/```
+ 1. Edit <code>/etc/salt/minion</code>, replacing <code>###SALT_MINION_ID###</code> with the hostname of the server.
+ 1. ```cp /var/local/git/unhangout-video-server/production/salt/grains.conf /etc/salt/minion.d/```
+ 1. Follow instructions below for configuring pillar data and SSL certs.
+ 1. ```salt-call state.highstate```
+ 
+### Configuring pillar data
+
+ * In the <code>salt/pillar/server</code> directory, you'll find three example configuration files: one for development, one for production, and one for common settings across environments.
+ * Copy the relevant example files in the same directory, removing the .example extension (eg. <code>development.sls.example</code> becomes <code>development.sls</code>).
+ * Edit the configurations to taste. You can reference salt/salt/vars.jinja to see what variables are available, and the defaults for each.
+ * It's highly recommended to provide SSH public keys for those users you wish to have root access to the server. See the example configurations.
+
+### Configuring SSL data
+
+ * You need valid SSL certificates in order for WebRTC to function properly, so get some from a provider
+ * Construct the files for Apache, using the information found [here](https://freeswitch.org/confluence/display/FREESWITCH/FreeSWITCH+1.6+Video#FreeSWITCH1.6Video-WSSETUPFAILEDwithSelf-signedcertificates)
+   * salt/salt/etc/ssl/certs/cert.pem
+   * salt/salt/etc/ssl/certs/chain.pem
+   * salt/salt/etc/ssl/private/key.pem
+ * Construct these files for FreeSWITCH, using the information found [here](https://freeswitch.org/confluence/display/FREESWITCH/FreeSWITCH+1.6+Video#FreeSWITCH1.6Video-Certificates)
+   * salt/salt/service/freeswitch/certs/[fqdn]/agent.pem
+   * salt/salt/service/freeswitch/certs/[fqdn]/cafile.pem
+   * salt/salt/service/freeswitch/certs/[fqdn]/wss.pem
+

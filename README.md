@@ -38,11 +38,11 @@ Vagrant/Salt configuration for automatically deploying an [Unhangout](http://unh
 ### Configuring SSL data
 
  * You need valid SSL certificates in order for WebRTC to function properly, so get some from a provider
- * Construct the files for Apache, using the information found [here](https://freeswitch.org/confluence/display/FREESWITCH/FreeSWITCH+1.6+Video#FreeSWITCH1.6Video-WSSETUPFAILEDwithSelf-signedcertificates)
+ * Construct the files for Apache, placing them inside the project checkout at these locations
    * salt/salt/etc/ssl/certs/cert.pem
    * salt/salt/etc/ssl/certs/chain.pem
    * salt/salt/etc/ssl/private/key.pem
- * Construct these files for FreeSWITCH, using the information found [here](https://freeswitch.org/confluence/display/FREESWITCH/FreeSWITCH+1.6+Video#FreeSWITCH1.6Video-Certificates)
+ * Construct these files for FreeSWITCH, placing them inside the project checkout at these locations, using the information found [here](https://freeswitch.org/confluence/display/FREESWITCH/FreeSWITCH+1.6+Video#FreeSWITCH1.6Video-Certificates)
    * salt/salt/service/freeswitch/certs/[fqdn]/agent.pem
    * salt/salt/service/freeswitch/certs/[fqdn]/cafile.pem
    * salt/salt/service/freeswitch/certs/[fqdn]/wss.pem

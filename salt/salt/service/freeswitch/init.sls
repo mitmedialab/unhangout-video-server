@@ -354,7 +354,8 @@ freeswitch-service:
       - file: /usr/local/freeswitch/conf/directory/default.xml
       - file: /usr/local/freeswitch/conf/freeswitch.xml
       - file: /usr/local/freeswitch/conf/sip_profiles/internal.xml
-      - file: /usr/local/freeswitch/images/unhangout-video-mute.png
+      # TODO: Re-enable this when a mute png has been added.
+      #- file: /usr/local/freeswitch/images/unhangout-video-mute.png
       - file: /usr/local/freeswitch/images/HelveticaNeue-Medium.ttf
       - cmd: freeswitch-build
 

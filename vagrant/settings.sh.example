@@ -14,21 +14,10 @@
 
 # Install path for the virtual machine. Make sure that the user executing the
 # installation script has permissions to create this directory.
-#VM_INSTALL_DIR="${HOME}/vagrant/example"
+#VM_INSTALL_DIR="${HOME}/vagrant/unhangout-video-server"
 
 # Box name to use for the Vagrantfile, config.vm.box setting.
-#VAGRANT_VM_BOX="chef/centos-6.6"
-
-# Full path to the Git checkout of the repository on the host.
-# If the directory does not already exist, then Git will be used to clone the
-# repository to this directory, using the URL and branch configured below.
-#GIT_CODE_DIR=""
-
-# The Git URL to use when cloning the repository.
-#GIT_CLONE_URL=""
-
-# The Git branch to use when checking out the repository.
-#GIT_CODE_BRANCH="master"
+#VAGRANT_VM_BOX="tiwilliam/debian-8.0"
 
 # Directory where the salt and pillar file roots are located. This is auto
 # configured by the deployement script, so unless you're doing something
@@ -44,10 +33,7 @@
 # The minion ID to be used in /etc/salt/minion.
 #SALT_MINION_ID="localhost.localdomain"
 
-# The development server that contains the Salt config.
-#DEV_SERVER=""
-
 # I've seen instances where the files need a bit of time to sync to shared
 # folders on the host. Setting this to 'yes' allows 60 seconds for that before
 # the reboot after the salt provisioning.
-#ALLOW_VM_FILE_SYNC_TIME="yes"
+#ALLOW_VM_FILE_SYNC_TIME="no"

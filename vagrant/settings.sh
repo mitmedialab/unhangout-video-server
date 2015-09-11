@@ -18,17 +18,6 @@ VM_INSTALL_DIR="/usr/local/vagrant/unvideo"
 # Box name to use for the Vagrantfile, config.vm.box setting.
 VAGRANT_VM_BOX="tiwilliam/debian-8.0"
 
-# Full path to the Git checkout of the repository on the host.
-# If the directory does not already exist, then Git will be used to clone the
-# repository to this directory, using the URL and branch configured below.
-#GIT_CODE_DIR=""
-
-# The Git URL to use when cloning the repository.
-#GIT_CLONE_URL=""
-
-# The Git branch to use when checking out the repository.
-#GIT_CODE_BRANCH="master"
-
 # Directory where the salt and pillar file roots are located. This is auto
 # configured by the deployement script, so unless you're doing something
 # custom, it's advised not to edit it.

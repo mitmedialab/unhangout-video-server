@@ -48,17 +48,21 @@
 
     </extension>
 
-    <!-- STEREO 48kHz conferences / Video MCU -->
+    <!-- NOTE: Left for testing purposes.
     <extension name="cdquality_conferences">
-      <condition field="username" expression="^unhangout_moderator@${domain}$" break="never">
-        <action application="set" data="conference_member_flags=moderator"/>
-      </condition>
       <condition field="destination_number" expression="^(35\d{2})$">
         <action application="info"/>
         <action application="answer"/>
         <action application="conference" data="$1-${domain_name}@video-mcu-stereo"/>
       </condition>
     </extension>
+    -->
+
+    <!--
+      Ignore the default files dropped in by FreeSWITCH, only include the
+      diaplan extensions specificed here.
+    -->
+    <X-PRE-PROCESS cmd="include" data="default/unhangout-conference.xml"/>
 
   </context>
 </include>

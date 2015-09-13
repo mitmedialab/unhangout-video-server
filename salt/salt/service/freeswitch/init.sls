@@ -311,15 +311,24 @@ build-wss.pem:
     - require:
       - cmd: freeswitch-build
 
-# TODO: Re-enable this when a mute png has been added.
-#/usr/local/freeswitch/images/unhangout-video-mute.png:
-#  file.managed:
-#    - source: salt://service/freeswitch/images/unhangout-video-mute.png
-#    - user: root
-#    - group: root
-#    - mode: 644
-#    - require:
-#      - cmd: freeswitch-build
+/usr/local/freeswitch/conf/dialplan/default/unhangout-conference.xml:
+  file.managed:
+    - source: salt://service/freeswitch/conf/dialplan/default/unhangout-conference.xml.jinja
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 644
+    - require:
+      - cmd: freeswitch-build
+
+/usr/local/freeswitch/images/unhangout-conference-video-mute.png:
+  file.managed:
+    - source: salt://service/freeswitch/images/unhangout-conference-video-mute.png
+    - user: root
+    - group: root
+    - mode: 644
+    - require:
+      - cmd: freeswitch-build
 
 /usr/local/freeswitch/images/HelveticaNeue-Medium.ttf:
   file.managed:
@@ -391,11 +400,11 @@ freeswitch-service:
       - file: /usr/local/freeswitch/conf/autoload_configs/modules.conf.xml
       - file: /usr/local/freeswitch/conf/autoload_configs/verto.conf.xml
       - file: /usr/local/freeswitch/conf/dialplan/default.xml
+      - file: /usr/local/freeswitch/conf/dialplan/default/unhangout-conference.xml
       - file: /usr/local/freeswitch/conf/directory/default.xml
       - file: /usr/local/freeswitch/conf/freeswitch.xml
       - file: /usr/local/freeswitch/conf/sip_profiles/internal.xml
-      # TODO: Re-enable this when a mute png has been added.
-      #- file: /usr/local/freeswitch/images/unhangout-video-mute.png
+      - file: /usr/local/freeswitch/images/unhangout-conference-video-mute.png
       - file: /usr/local/freeswitch/images/HelveticaNeue-Medium.ttf
       - cmd: freeswitch-build
 

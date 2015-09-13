@@ -1,0 +1,31 @@
+<include>
+
+  <extension name="unhangout_setup">
+    <condition field="destination_number" expression="^unhangout_setup$">
+      <condition field="username" expression="^unhangout_moderator@${domain}$" break="never">
+        <action application="set" data="conference_member_flags=moderator"/>
+      </condition>
+      <action application="set" data="video_banner_text={font_face=$${images_dir}/HelveticaNeue-Medium.ttf,font_scale=5,bg=#2E7DAA,fg=#FFFFFF}${caller_id_name}"/>
+      <action application="set" data="video_mute_png=$${images_dir}/unhangout-conference-video-mute.png"/>
+    </condition>
+  </extension>
+
+  <extension name="unhangout_call_conference">
+    <condition field="destination_number" expression="^unhangout_call_conference$">
+      <action application="info"/>
+      <action application="conference" data="unhangout-conference@unhangout++flags{nomoh}"/>
+    </condition>
+  </extension>
+
+  <extension name="unhangout_conference">
+    <condition field="destination_number" expression="^unhangout_conference$" break="never">
+      <action application="execute_extension" data="unhangout_setup"/>
+      <action application="execute_extension" data="unhangout_call_conference"/>
+    </condition>
+  </extension>
+
+</include>
+
+<!--
+  vi: ft=xml
+-->

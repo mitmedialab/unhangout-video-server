@@ -96,7 +96,7 @@ if [ $? -ne 0 ]; then
   add_message "Test for internet connectivity failed, you must have an active internet connection"
 fi
 
-if [ -n "$DEV_USER" ]; then
+if [ -n "$DEV_USERNAME" ]; then
   echo "Checking for SSH access for ${DEV_USERNAME}@${DEV_SERVER}"
   ssh ${DEV_SERVER} ls /home/${DEV_USERNAME} &> /dev/null
   if [ $? -ne 0 ]; then

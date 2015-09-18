@@ -11,8 +11,9 @@ Vagrant/Salt configuration for automatically deploying an [Unhangout](http://unh
  1. Follow instructions below for configuring pillar data and SSL certs.
  1. From the command line, run <code>./development-environment-init.sh</code>.
  1. Once the script successfully completes the pre-flight checks, it will automatically handle the rest of the installation and setup. Relax, grab a cup of chai, and watch the setup process roll by on screen. :)
- 1. Visit <code>https://[server URL]/verto-communicator</code> in your browser, and you should see the main page for FreeSWTICH's Verto Communicator.
  1. The setup script outputs optional configuration you can add to your .ssh/config file, to enable easy root SSH access to the server if you configured an SSH pubkey as above.
+ 1. SSH into the VM, and run ```start-conference.sh```
+ 1. Visit <code>https://[server URL]:9001</code> in your browser, and you should see the main page for FreeSWTICH's Verto Communicator. The grunt development server will watch all files in the Verto Communicator package (by default located at ```/usr/local/src/freeswitch.git/html5/verto/verto_communicator/src```), and rebuild client-side assets on any changes. *NOTE: At this time, the grunt development server doesn't recognize the installed SSL certificates, so you'll most likely need to trust them manually.*
  1. The installed virtual machine can be controlled like any other Vagrant VM. See [this Vagrant cheat sheet](http://notes.jerzygangi.com/vagrant-cheat-sheet) for more details.
  1. If for any reason the installation fails, or you just want to completely remove the installed virtual machine, run the <code>vagrant/kill-development-environment.sh</code> script from the command line.
 

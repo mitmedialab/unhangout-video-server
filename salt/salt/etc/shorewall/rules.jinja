@@ -12,7 +12,7 @@ Invalid(DROP) net   $FW     tcp
 
 ACCEPT    net       $FW     tcp   {{ sshd_port }}
 
-{% for port in ['80', '443', '5066', '7443', '8081', '8082'] -%}
+{% for port in ['80', '443', '5066', '7443', '8081', '8082', '9001'] -%}
 ACCEPT    net       $FW     tcp   {{ port }}
 {% endfor -%}
 

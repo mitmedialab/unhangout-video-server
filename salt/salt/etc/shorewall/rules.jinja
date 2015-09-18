@@ -12,9 +12,14 @@ Invalid(DROP) net   $FW     tcp
 
 ACCEPT    net       $FW     tcp   {{ sshd_port }}
 
-{% for port in ['80', '443', '5066', '7443', '8081', '8082', '9001'] -%}
+{% for port in ['80', '443', '5066', '7443', '8081', '8082'] -%}
 ACCEPT    net       $FW     tcp   {{ port }}
 {% endfor -%}
+
+{% if server_env == 'development' %}
+# Port for the grunt-based HTTP development server.
+ACCEPT    net       $FW     tcp   9001
+{% endif -%}
 
 {% for port in ['5060', '5061', '5080', '5081'] -%}
 ACCEPT    net       $FW     tcp   {{ port }}

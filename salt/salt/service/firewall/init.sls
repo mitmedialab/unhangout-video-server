@@ -37,6 +37,7 @@ firewall-packages:
   file.managed:
     - template: jinja
     - context:
+      server_env: {{ server_env }}
       sshd_port: {{ sshd_port }}
     - source: salt://etc/shorewall/rules.jinja
     - user: root

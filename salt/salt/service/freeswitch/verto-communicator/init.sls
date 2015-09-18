@@ -2,6 +2,7 @@
 
 include:
   - service.npm
+  - service.httpd
   - service.freeswitch
 
 verto-communicator-packages:

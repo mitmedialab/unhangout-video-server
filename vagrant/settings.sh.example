@@ -4,9 +4,6 @@
 # to customize any of the listed installation variables. Default values are
 # shown in the commented out lines.
 
-# Space-separated list of ports to verify as open on the host.
-#PORTS_TO_CHECK="2222"
-
 # Directory where the Vagrantfile and development deployment scripts live. It
 # will be auto-configured by the deployment script, and is included here only
 # for reference.

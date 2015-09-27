@@ -2,7 +2,7 @@
 
 # Convenience script for starting/stopping the virtual machine.
 
-VM_INSTALL_DIR="${HOME}/vagrant/example"
+VM_INSTALL_DIR="${HOME}/vagrant/unhangout-video-server"
 
 SCRIPT_NAME=`basename $0`
 

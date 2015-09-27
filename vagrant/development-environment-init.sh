@@ -7,11 +7,12 @@
 DEV_SERVER=""
 PORTS_TO_CHECK="9001"
 SSH_PORT="2222"
-SSH_CONFIG_LABEL="example"
+SSH_CONFIG_LABEL="unhangout-video-server"
 MESSAGE_STORE=""
-VM_INSTALL_DIR="${HOME}/vagrant/example"
-GIT_CODE_DIR=""
-GIT_CODE_BRANCH="master"
+VM_INSTALL_DIR="${HOME}/vagrant/unhangout-video-server"
+FREESWITCH_GIT_DIR="${HOME}/git/freeswitch"
+FREESWITCH_GIT_URL="ssh://git@freeswitch.org:7999/~unhangout/freeswitch.git"
+FREESWITCH_GIT_BRANCH="unhangout-video-server"
 
 SCRIPT_NAME=`basename $0`
 
@@ -67,18 +68,23 @@ check_executable() {
 }
 
 setup_git_repo() {
-  if [ -n "${GIT_CODE_DIR}" ] && [ ! -d "${GIT_CODE_DIR}" ]; then
-    echo "Setting up $GIT_CLONE_URL repository in ${GIT_CODE_DIR}..."
-    git clone $GIT_CLONE_URL $GIT_CODE_DIR
-    cd ${GIT_CODE_DIR}
-    if [ "$GIT_CODE_BRANCH" = "master" ]; then
+  if [ -n "${FREESWITCH_GIT_DIR}" ] && [ ! -d "${FREESWITCH_GIT_DIR}" ]; then
+    local checkout_base_dir="`dirname $FREESWITCH_GIT_DIR`"
+    if [ ! -d $checkout_base_dir ]; then
+      echo "Creating ${checkout_base_dir}..."
+      mkdir -p ${checkout_base_dir}
+    fi
+    echo "Setting up $FREESWITCH_GIT_URL repository in ${FREESWITCH_GIT_DIR}..."
+    git clone $FREESWITCH_GIT_URL $FREESWITCH_GIT_DIR
+    cd ${FREESWITCH_GIT_DIR}
+    if [ "$FREESWITCH_GIT_BRANCH" = "master" ]; then
       git branch --set-upstream-to=origin/master master
       git config remote.origin.push HEAD
     else
       local git_branch=`git rev-parse --abbrev-ref HEAD`
-      if [ "$git_branch" != "$GIT_CODE_BRANCH" ]; then
-        echo "Checking out ${GIT_CODE_BRANCH}, and setting up remote tracking..."
-        git checkout -t origin/${GIT_CODE_BRANCH}
+      if [ "$git_branch" != "$FREESWITCH_GIT_BRANCH" ]; then
+        echo "Checking out ${FREESWITCH_GIT_BRANCH}, and setting up remote tracking..."
+        git checkout -t origin/${FREESWITCH_GIT_BRANCH}
       fi
     fi
   fi
@@ -142,6 +148,8 @@ if [ -n "$MESSAGE_STORE" ]; then
 fi
 
 echo "All pre-flight checks passed"
+
+setup_git_repo
 
 echo "Initializing development server install..."
 ${VAGRANT_CONFIG_DIR}/vm-init.sh "$VAGRANT_CONFIG_DIR" "$DEV_USERNAME" "$DEV_SERVER"

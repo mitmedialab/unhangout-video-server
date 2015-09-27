@@ -50,6 +50,7 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
   config.vm.synced_folder "###SALT_DIR###/", "/srv/salt/", owner: "root", group: "root"
+  config.vm.synced_folder "###FREESWITCH_GIT_DIR###/", "/usr/local/src/freeswitch.git/", owner: "root", group: "root"
   # Uncomment this if you want a the GIT_CODE_DIR checkout on the host to be
   # available on the VM. Be sure to set [vm_dir] to the location you want the
   # directory to be available on the VM.

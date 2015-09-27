@@ -3,8 +3,8 @@
 # Removes all files associated with the development environment, use with
 # extreme caution!
 
-VM_INSTALL_DIR="${HOME}/vagrant/example"
-GIT_CODE_DIR=""
+VM_INSTALL_DIR="${HOME}/vagrant/unhangout-video-server"
+FREESWITCH_GIT_DIR="${HOME}/git/freeswitch"
 
 SCRIPT_NAME=`basename $0`
 
@@ -57,8 +57,8 @@ if [ -d $VM_INSTALL_DIR ]; then
 
     echo "Removal complete."
 
-    if [ -n "$GIT_CODE_DIR" ] && [ -d "$GIT_CODE_DIR" ]; then
-      echo "$GIT_CODE_DIR was preserved, and can be removed manually."
+    if [ -n "$FREESWITCH_GIT_DIR" ] && [ -d "$FREESWITCH_GIT_DIR" ]; then
+      echo "$FREESWITCH_GIT_DIR was preserved, and can be removed manually."
     fi
 
   else

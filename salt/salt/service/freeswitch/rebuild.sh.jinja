@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Rebuild FreeSWITCH after source code updates.
+
+cd {{ freeswitch_git_checkout }}
+
+./bootstrap.sh -j
+./configure -C
+
+make
+make install
+
+service freeswitch restart
+
+# vi: ft=sh
+

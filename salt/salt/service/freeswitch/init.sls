@@ -1,7 +1,20 @@
-{% from 'vars.jinja' import server_id, server_env, server_encryption_password, freeswitch_git_checkout, freeswitch_git_revision, freeswitch_ip, freeswitch_default_password, freeswitch_conference_unhangout_user_password, freeswitch_conference_unhangout_moderator_password with context %}
+{% from 'vars.jinja' import
+  freeswitch_conference_unhangout_moderator_password,
+  freeswitch_conference_unhangout_user_password,
+  freeswitch_default_password,
+  freeswitch_git_checkout,
+  freeswitch_git_revision,
+  freeswitch_git_url,
+  freeswitch_ip,
+  server_encryption_password,
+  server_env,
+  server_id,
+  server_type
+with context %}
 
 include:
   - repo.freeswitch
+  - service.httpd
 
 freeswitch-group:
   group.present:
@@ -47,13 +60,15 @@ freeswitch-repo-deps-rmenv:
     # re-executing.
     - unless: test -d /usr/share/doc/freeswitch-video-deps-most
 
+{% if server_type != 'vagrant' -%}
 freeswitch-git-checkout:
   git.latest:
-    - name: https://freeswitch.org/stash/scm/fs/freeswitch.git
+    - name: {{ freeswitch_git_url }}
     - rev: {{ freeswitch_git_revision }}
     - target: {{ freeswitch_git_checkout }}
     - require:
       - environ: freeswitch-repo-deps-rmenv
+{% endif -%}
 
 freeswitch-build:
   cmd.script:
@@ -63,8 +78,12 @@ freeswitch-build:
     - require:
       - group: freeswitch-group
       - user: freeswitch-user
+{% if server_type != 'vagrant' %}
     - onchanges:
       - git: freeswitch-git-checkout
+{% else %}
+    - unless: test -d /usr/local/freeswitch
+{% endif %}
 
 /usr/local/freeswitch/certs:
   file.directory:
@@ -407,6 +426,37 @@ freeswitch-service:
       - file: /usr/local/freeswitch/images/unhangout-conference-video-mute.png
       - file: /usr/local/freeswitch/images/HelveticaNeue-Medium.ttf
       - cmd: freeswitch-build
+
+/usr/local/bin/fs:
+  file.managed:
+    - source: salt://service/freeswitch/fs.jinja
+    - template: jinja
+    - context:
+      server_env: {{ server_env }}
+    - user: root
+    - group: root
+    - mode: 755
+
+{% if server_env != 'production' %}
+/usr/local/bin/fs-debug:
+  file.managed:
+    - source: salt://service/freeswitch/fs-debug
+    - user: root
+    - group: root
+    - mode: 755
+
+/usr/local/bin/rebuild-freeswitch.sh:
+  file.managed:
+    - source: salt://service/freeswitch/rebuild.sh.jinja
+    - template: jinja
+    - context:
+      freeswitch_git_checkout: {{ freeswitch_git_checkout }}
+    - user: root
+    - group: root
+    - mode: 755
+    - require:
+      - cmd: freeswitch-build
+{% endif %}
 
 extend:
   freeswitch-repo:

@@ -5,11 +5,11 @@
 VAGRANT_CONFIG_DIR=$1
 DEV_USER=$2
 DEV_SERVER=$3
-VM_INSTALL_DIR="${HOME}/vagrant/example"
-GIT_CODE_DIR=""
+VM_INSTALL_DIR="${HOME}/vagrant/unhangout-video-server"
+FREESWITCH_GIT_DIR="${HOME}/git/freeswitch"
 SALT_DIR="`dirname $VAGRANT_CONFIG_DIR 2> /dev/null`/salt"
 VAGRANT_VM_BOX="bento/debian-8.2"
-SALT_MINION_ID="localhost.localdomain"
+SALT_MINION_ID="unhangout-video.media.mit.edu"
 ALLOW_VM_FILE_SYNC_TIME="yes"
 SSH_PORT="2222"
 
@@ -61,8 +61,8 @@ sed -i.bak "s%###SALT_DIR###%${SALT_DIR}%g" Vagrantfile
 rm Vagrantfile.bak
 sed -i.bak "s%###SALT_MINION_ID###%${SALT_MINION_ID}%g" Vagrantfile
 rm Vagrantfile.bak
-if [ -n "${GIT_CODE_DIR}" ]; then
-  sed -i.bak "s%###GIT_CODE_DIR###%${GIT_CODE_DIR}%g" Vagrantfile
+if [ -n "${FREESWITCH_GIT_DIR}" ]; then
+  sed -i.bak "s%###FREESWITCH_GIT_DIR###%${FREESWITCH_GIT_DIR}%g" Vagrantfile
   rm Vagrantfile.bak
 fi
 if [ -n "$DEV_SERVER" ]; then

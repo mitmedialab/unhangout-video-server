@@ -27,7 +27,10 @@
 {% set host_entries = salt['pillar.get']('server:network:host_entries', []) -%}
 
 #FreeSWITCH.
-{% set freeswitch_git_revision = salt['pillar.get']('software:freeswitch:git:revision', 'v1.6') -%}
+# NOTE: If you edit any of the freeswitch_git_* settings, the values
+# in settings.sh and the setup Vagrantfile should also be edited to match.
+{% set freeswitch_git_url = salt['pillar.get']('software:freeswitch:git:url', 'ssh://git@freeswitch.org:7999/~unhangout/freeswitch.git') -%}
+{% set freeswitch_git_revision = salt['pillar.get']('software:freeswitch:git:revision', 'unhangout-video-server') -%}
 {% set freeswitch_git_checkout = salt['pillar.get']('software:freeswitch:git:checkout', '/usr/local/src/freeswitch.git') -%}
 {% set freeswitch_ws_internal_port = salt['pillar.get']('service:freeswitch:sip:internal:ws', '5066') -%}
 {% set freeswitch_wss_internal_port = salt['pillar.get']('service:freeswitch:sip:internal:wss', '7443') -%}

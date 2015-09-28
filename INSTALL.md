@@ -10,7 +10,7 @@
 ### Vagrant development servers.
  1. Install an SSH keypair on the host machine if one doesn't exist already.
  1. Install [Git](http://git-scm.com), [Vagrant](https://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org). OS X [Homebrew](http://brew.sh) users, consider easy installation via [Homebrew Cask](http://caskroom.io). *NOTE:* VirtualBox 5.x appears to have some issues creating symlinks. Until this issue is resolved, recommend to install the latest 4.3.x version (Homebrew Cask users can use [homebrew-cask-versions](https://github.com/caskroom/homebrew-versions)).
- 1. Run the following command to checkout this project: ```git clone https://github.com/thehunmonkgroup/unhangout-video-server.git```
+ 1. Run the following command to checkout this project: ```git clone https://github.com/unhangout/unhangout-video-server.git```
  1. From the command line, change to the <code>vagrant</code> directory, and you'll find <code>settings.sh.example</code>. Copy that file in the same directory to <code>settings.sh</code>.
  1. Edit to taste, the default values will most likely work just fine.
  1. Follow instructions below for configuring pillar data and SSL certs.

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# This isn't the cleanest place to put this, but it allows for also rebuilding
+# verto communicator automatically in production installs.
+rm -rf html5/verto/verto_communicator/bower_components/ html5/verto/verto_communicator/node_modules/
+
 ./bootstrap.sh -j
 ./configure -C
 

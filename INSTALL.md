@@ -43,7 +43,7 @@
    * key.pem: The server's SSL private key.
    * chain.pem: The SSL chain file or root certificate authority.
 
-Note that these FreeSWITCH SSL files are constructed on the server automatically from the files listed above -- if the server certificate, key, or chain files are ever replaced, these files should be removed, and Salt's <code>state.highstate</code> should be run to rebuild them.
+Note that the FreeSWITCH SSL files are constructed on the server automatically from the files listed above -- if the server certificate, key, or chain files are ever replaced, these files should be removed, and Salt's <code>state.highstate</code> should be run to rebuild them.
    * /usr/local/freeswitch/certs/agent.pem
    * /usr/local/freeswitch/certs/cafile.pem
    * /usr/local/freeswitch/certs/wss.pem

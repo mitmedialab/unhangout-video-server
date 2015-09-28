@@ -2,8 +2,8 @@
 
 **Note:** To work directly in the FreeSWITCH repository that the Unhangout team uses (which is the default repository in the configuration), you'll need to follow these steps prior to setting up a development environment:
  1. [Register](https://freeswitch.org/jira/secure/Signup!default.jspa) a FreeSWITCH Jira account if you haven't already.
- 1. Validate your registration then login to the Jira site.
- 1. Login to [FreeSWITCH Stash](https://freeswitch.org/stash)
+ 1. Validate your registration via the sent email, then login to the Jira site.
+ 1. Login to [FreeSWITCH Stash](https://freeswitch.org/stash) using the same login credentials you created for the Jira account.
  1. Click on the profile icon in the upper right, then click on 'Manage account'.
  1. Click on 'SSH keys', then add the SSH pubkey for your development machine to your account.
 

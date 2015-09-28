@@ -78,6 +78,7 @@ freeswitch-build:
     - require:
       - group: freeswitch-group
       - user: freeswitch-user
+      - pkg: freeswitch-video-deps-package
 {% if server_type != 'vagrant' %}
     - onchanges:
       - git: freeswitch-git-checkout

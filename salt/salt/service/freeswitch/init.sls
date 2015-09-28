@@ -153,6 +153,14 @@ build-wss.pem:
     - require:
       - cmd: freeswitch-build
 
+/usr/local/freeswitch/images:
+  file.directory:
+    - user: root
+    - group: root
+    - dir_mode: 755
+    - require:
+      - cmd: freeswitch-build
+
 /usr/local/freeswitch/log:
   file.directory:
     - user: freeswitch
@@ -347,6 +355,7 @@ build-wss.pem:
     - group: root
     - mode: 644
     - require:
+      - file: /usr/local/freeswitch/images
       - cmd: freeswitch-build
 
 /usr/local/freeswitch/images/HelveticaNeue-Medium.ttf:
@@ -356,6 +365,7 @@ build-wss.pem:
     - group: root
     - mode: 644
     - require:
+      - file: /usr/local/freeswitch/images
       - cmd: freeswitch-build
 
 symlink-fs-cli-to-path:

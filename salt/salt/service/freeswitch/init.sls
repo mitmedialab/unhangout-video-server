@@ -44,6 +44,7 @@ freeswitch-repo-deps-setenv:
 freeswitch-video-deps-package:
   pkg.installed:
     - name: freeswitch-video-deps-most
+    - refresh: True
     - require:
       - environ: freeswitch-repo-deps-setenv
 

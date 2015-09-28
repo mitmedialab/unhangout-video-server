@@ -6,6 +6,7 @@
  1. Login to [FreeSWITCH Stash](https://freeswitch.org/stash) using the same login credentials you created for the Jira account.
  1. Click on the profile icon in the upper right, then click on 'Manage account'.
  1. Click on 'SSH keys', then add the SSH pubkey for your development machine to your account.
+ 1. Request commit access from the Unhangout team to the repository -- once it's granted you can continue with the development setup below.
 
 ### Vagrant development servers.
  1. Install an SSH keypair on the host machine if one doesn't exist already.

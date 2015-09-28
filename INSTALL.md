@@ -1,5 +1,12 @@
 ## Installation
 
+**Note:** To work directly in the FreeSWITCH repository that the Unhangout team uses (which is the default repository in the configuration), you'll need to follow these steps prior to setting up a development environment:
+ 1. [Register](https://freeswitch.org/jira/secure/Signup!default.jspa) a FreeSWITCH Jira account if you haven't already.
+ 1. Validate your registration then login to the Jira site.
+ 1. Login to [FreeSWITCH Stash](https://freeswitch.org/stash)
+ 1. Click on the profile icon in the upper right, then click on 'Manage account'.
+ 1. Click on 'SSH keys', then add the SSH pubkey for your development machine to your account.
+
 ### Vagrant development servers.
  1. Install an SSH keypair on the host machine if one doesn't exist already.
  1. Install [Git](http://git-scm.com), [Vagrant](https://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org). OS X [Homebrew](http://brew.sh) users, consider easy installation via [Homebrew Cask](http://caskroom.io). *NOTE:* VirtualBox 5.x appears to have some issues creating symlinks. Until this issue is resolved, recommend to install the latest 4.3.x version (Homebrew Cask users can use [homebrew-cask-versions](https://github.com/caskroom/homebrew-versions)).

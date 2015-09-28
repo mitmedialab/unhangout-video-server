@@ -33,7 +33,7 @@
 
  * In the <code>salt/pillar/server</code> directory, you'll find three example configuration files: one for development, one for production, and one for common settings across environments.
  * Copy the relevant example files in the same directory, removing the .example extension (eg. <code>development.sls.example</code> becomes <code>development.sls</code>).
- * Edit the configurations to taste. You can reference salt/salt/vars.jinja to see what variables are available, and the defaults for each.
+ * Edit the configurations to taste. You can reference <code>salt/salt/vars.jinja</code> to see what variables are available, and the defaults for each.
 
 ### Configuring SSL data
 

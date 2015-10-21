@@ -60,3 +60,30 @@ The setup script clones a git repository for FreeSWITCH to the host machine, in 
    * <code>start-conference.sh</code>: Starts a development web server for Verto Communicator. The server will watch all files in the Verto Communicator package, and rebuild client-side assets on any changes. *NOTE: At this time, the grunt development server doesn't recognize the installed SSL certificates, so you'll most likely need to trust them manually.*
    * <code>rebuild-freeswitch.sh</code>: If the source code for FreeSWITCH is updated in your local checkout (most likely by a merge from upstream), this script can be used to rebuild FreeSWITCH.
    * <code>rebuild-conference.sh</code>: If the source code for Verto Communicator is updated such that its dependencies change, this script can be used to rebuild the dependencies.
+
+## Running the freeswitch development environment
+
+ 1. Make sure the virtual machine is booted and ready. Check the VM’s status, and if it’s in stop mode, start it. 
+ 
+   * ```cd unhangout-video-server```
+   * ```cd vagrant```
+   * ```./manage-vm.status status```
+   * 
+   * If machine is in stop mode, then only execute the following command
+   * ```./manage-vm.status start```
+ 
+ 2. SSH into the VM
+   * ```ssh unhangout-video```
+
+3. Start the development server for the verto communicator app by issuing the following command. 
+   * ```start-conference.sh```
+
+4. Navigate to the following URL in your browser and load the app ```https:[SALT_MINION_ID]:9001```
+
+5. Change to the freeswitch code directory, make changes and watch the web server in action and corresponding logs for command ```start-conference.sh```.
+
+
+
+
+
+

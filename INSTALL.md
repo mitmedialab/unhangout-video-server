@@ -70,7 +70,7 @@ The setup script clones a git repository for FreeSWITCH to the host machine, in 
    * If machine is in stop mode, then only execute the following command
    * ```./manage-vm.status start```
  2. SSH into the VM
-   * ```ssh unhangout-video```
+   * ```ssh <i>hostkeyaliasforyourvm</i>```
  3. Start the development server for the verto communicator app by issuing the following command. 
    * ```start-conference.sh```
  4. Navigate to the following URL in your browser and load the app ```https:[SALT_MINION_ID]:9001```

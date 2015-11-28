@@ -7,4 +7,4 @@ early-packages:
       - curl
       - perl
       - wget
-
+    - refresh: True
